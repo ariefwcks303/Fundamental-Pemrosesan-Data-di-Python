@@ -30,3 +30,4 @@ Proyek ini mendemonstrasikan proses dasar *Web Scraping* dan *API Extraction* me
 Jalankan *script* dari Terminal/Command Prompt di folder proyek:
 
 ```bash
+python main.py
