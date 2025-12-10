@@ -1,75 +1,32 @@
-# 🧩 Data Handling Projects Portfolio (Python)
+# 🌐 Dicoding Quote API Extractor (JSON Data Acquisition)
 
-Proyek ini adalah koleksi *script* Python yang mendemonstrasikan kemampuan fundamental dalam *Data Science* dan pengembangan *backend*, meliputi koneksi *database*, operasi CRUD, pengambilan data dari API, dan pemrosesan *file* non-standar (Excel).
+Proyek ini mendemonstrasikan proses dasar *Web Scraping* dan *API Extraction* menggunakan Python. Tujuannya adalah mengambil data kutipan (*quotes*) dalam format JSON dari *endpoint* Dicoding, memprosesnya, dan menyimpannya secara lokal.
 
-## 1. 📂 Proyek I: PostgreSQL CRUD & Data Management
+### 📋 Teknologi yang Digunakan
 
-Bagian ini berfokus pada interaksi penuh dengan *database* PostgreSQL.
+* **Bahasa Pemrograman:** Python
+* **Library Utama:** `urllib.request` (built-in, untuk koneksi HTTP)
+* **Library Pendukung:** `json` (built-in, untuk parsing dan penyimpanan JSON)
 
-### Teknologi
-* **Database:** PostgreSQL
-* **ORM/Koneksi:** SQLAlchemy, Psycopg2
-* **Verifikasi Data:** Pandas
-
-### Struktur File (Folder: CONNECTING-TO-POSTGRE)
-
-| File | Fungsi | Operasi CRUD |
-| :--- | :--- | :--- |
-| `create_db.py` | Membuat *database* tujuan (`companydb`) sebagai langkah inisiasi. | **CREATE (Database)** |
-| `main.py` | Mendefinisikan skema tabel `users` dan menyisipkan (*INSERT*) data. | **CREATE (Table) & INSERT** |
-| `update_data.py` | Memperbarui (*UPDATE*) data di tabel `users`. | **UPDATE** |
-| `read_data.py` | Membaca (*SELECT*) semua data dari tabel `users` menggunakan Pandas. | **READ** |
-| `delete_data.py` | (Opsional) Berisi logika untuk menghapus (*DELETE*) baris data. | **DELETE** |
-
-### Prasyarat
-
-* PostgreSQL Server harus berjalan di `localhost:5432`.
-* Instalasi *library*: `pip install sqlalchemy psycopg2-binary pandas`
-
-***
-
-## 2. 🌐 Proyek II: Data Extraction & Format Handling
-
-Bagian ini menunjukkan kemampuan mengambil data dari sumber eksternal (API) dan memproses *file* berformat lain (Excel).
-
-### Teknologi
-* **API:** Python `urllib.request` (built-in)
-* **File Handling:** JSON, Pandas (untuk Excel)
-
-### Struktur File (Folder: DICODING-QUOTE-API)
+### ⚙️ Struktur Proyek
 
 | File | Fungsi |
 | :--- | :--- |
-| `main.py` | Mengambil data JSON dari API Dicoding dan menyimpan hasilnya ke *file* `dicoding_quotes.json`. |
+| `main.py` | Mengambil data dari API, mengubahnya menjadi objek Python, dan menyimpannya sebagai *file* `dicoding_quotes.json`. |
+| `dicoding_quotes.json` | *File* *output* yang berisi data kutipan dalam format JSON terstruktur. |
+| `requirements.txt` | Daftar *library* yang dibutuhkan (saat ini hanya mengandalkan *built-in* Python). |
 
-### Struktur File (Folder: EXTRACTING-OTHER-FORMAT)
+### 🚀 Apa yang Dilakukan Script Ini? (`main.py`)
 
-| File | Fungsi |
-| :--- | :--- |
-| `main.py` | Memuat (*read*) data dari *file* Excel (`spreadsheets/customer_and_product.xlsx`) ke dalam **Pandas DataFrame** untuk diproses. |
+1.  Melakukan permintaan HTTP GET ke URL API (`https://quote-api.dicoding.dev/list`).
+2.  Membaca respons (yang merupakan *string* JSON mentah).
+3.  Mengubah *string* tersebut menjadi objek *list* atau *dictionary* Python (`json.loads`).
+4.  Menulis objek tersebut kembali ke disk sebagai *file* `dicoding_quotes.json`, menggunakan *pretty-print* (`indent=4`) agar mudah dibaca.
 
-### Prasyarat
+### ▶️ Cara Menjalankan Proyek
 
-* Instalasi *library* tambahan untuk *spreadsheet*: `pip install pandas openpyxl`
+#### 1. Eksekusi Script
 
-***
+Jalankan *script* dari Terminal/Command Prompt di folder proyek:
 
-## ▶️ Cara Menjalankan Proyek
-
-### A. Menjalankan Proyek PostgreSQL
-
-1.  Pindah ke folder `CONNECTING-TO-POSTGRE`.
-2.  Jalankan berurutan: `python create_db.py`, lalu `python main.py`.
-
-### B. Menjalankan Proyek API Extraction
-
-1.  Pindah ke folder `DICODING-QUOTE-API`.
-2.  Jalankan: `python main.py` (akan menghasilkan file `dicoding_quotes.json`).
-
-### C. Menjalankan Proyek Excel Extraction
-
-1.  Pindah ke folder `EXTRACTING-OTHER-FORMAT`.
-2.  Pastikan *file* Excel berada di *path* `spreadsheets/customer_and_product.xlsx`.
-3.  Jalankan: `python main.py`
-
----
+```bash
